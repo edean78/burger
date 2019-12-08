@@ -36,8 +36,8 @@ function odjToSql(ob) {
 // Object for all our SQL statment functions.
 var orm = {
     selectAll: function(tableInput, cb){
-        var queryString = "SELECT * FROM " + tableInput + ";";
-        connection.query(queryString, function(err, result){
+        var queryString = "SELECT * FROM ??";
+        connection.query(queryString,[tableInput], function(err, result){
             if (err) {
                 throw err;
             }
@@ -45,19 +45,12 @@ var orm = {
         });
     },
 
-    insertOne: function(table, cols, vals, cb){
-        var queryString = "INSERT INTO " + table;
-        
-        queryString += " (";
-        queryString += cols.toString();
-        queryString += ") ";
-        queryString += "VALUES (";
-        queryString += printQuestionMarks(vals.length);
-        queryString += ") ";
+    insertOne: function(tableInput, colName, burName, cb){
+        var queryString = "INSERT INTO ?? (??) VALUES (?)";
 
         console.log(queryString);
 
-        connection.query(queryString, vals, function(err, result) {
+        connection.query(queryString, [tableInput, colName, burName], function(err, result) {
             if (err) {
                 throw err;
             }
@@ -66,17 +59,13 @@ var orm = {
         });
     },
     
-    updateOne: function(table, objColVals, condition, cb) {
-        var queryString = "UPDATE " + table;
+    updateOne: function(tableInput, updateColName, updateRow, searchCol, searchRow, cb) {
+        var queryString = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
 
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
 
         console.log(queryString);
 
-        connection.query(queryString, function(err, result){
+        connection.query(queryString, [tableInput, updateColName, updateRow, searchCol, searchRow], function(err, result){
             if (err) {
                 throw err;
             }
