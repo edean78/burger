@@ -23,11 +23,11 @@
         <div class="panel-body">
             <ul>
                 {{#each burgers}}
-                {{#unless this.devoured}}
+                {{#unless this.isDevoured}}
                 <li>
                     #{{this.id}}<span> {{this.burger_name}}</span>
                     <form action="/{{this.id}}?_method=PUT" method="POST">
-                        <input name="devour" value="true">
+                        {{!-- <input name="devour" value="true"> --}}
                         <button type="submit" class="btn btn-warning btn-sm">DEVOUR!</button>
                     </form>
                 </li>
@@ -45,7 +45,7 @@
     <div class="panel-body">
         <ul>
             {{#each burgers}}
-                {{#if this.devoured}}
+                {{#if this.isDevoured}}
                 <li>
                     #{{this.id}}<span> {{this.burger_name}}</span>
                 </li>
