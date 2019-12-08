@@ -1,36 +1,57 @@
-<header>
-    <h1>EAT-DA-BURGER</h1>
-</header>
+<div class="wrapper">
+    <header>
+        <h1>EAT-DA-BURGER</h1>
+        <img src="./public/assets/img/hamburger.jpeg" alt="hamburger-pic" />
+    </header>
 
-<div class="container">
-    <div class="create-burger">
-        <h2>Add a Burger</h2>
-            <form class="create-form" method="POST">
-                <label for="bur">Burger Name:</label> 
+    <div class="container">
+        <form class="create-burger" action="/" method="POST">
+            <h2>Add a Burger</h2>
+            <div class="form-group">
+                <label for="bur">Enter a Burger to Eat</label>
                 <input type="text" id="burger-name" name="burger_name">
-                <button type="submit">Submit</button>
-            </form>
+                <button type="submit">Add Burger</button>
+            </div>
+        </form>
     </div>
-    <section class="burger-container">
-        <div class="burgers">
-            {{#each burgers}}
-                {{#unless this.devoured}}
-                <div class="burger">
-                    <p>
-                        {{burger_name}}<span>#{{id}}</span>
-                        <button class="change-devoured" data-id="{{id}}">DEVOUR!!</button>
-                    </p>>
-                </div>
-                {{/unless}}
-            {{/each}}    
+    <br>
+
+    <div class="panel panel-default col-md-5" id="panel-left">
+        <div class="panel-heading">
+            <h3>Burger to Eat</h3>
         </div>
-        <div class="burger-devoured">
+        <div class="panel-body">
+            <ul>
+                {{#each burgers}}
+                {{#unless this.devoured}}
+                <li>
+                    #{{this.id}}<span> {{this.burger_name}}</span>
+                    <form action="/{{this.id}}?_method=PUT" method="POST">
+                        <input name="devour" value="true">
+                        <button type="submit" class="btn btn-warning btn-sm">DEVOUR!</button>
+                    </form>
+                </li>
+                {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default col-md-5">
+        <div class="panel-heading">
+            <h3>Devoured Burgers!</h3>
+        </div>
+    </div>
+    <div class="panel-body">
+        <ul>
             {{#each burgers}}
                 {{#if this.devoured}}
-                <div class="burger">{{burger_name}}<span>#{{id}}</span></div>
+                <li>
+                    #{{this.id}}<span> {{this.burger_name}}</span>
+                </li>
                 {{/if}}
             {{/each}}    
-        </div>
-    </section> 
+        </ul>
+    </div>
 
 </div>

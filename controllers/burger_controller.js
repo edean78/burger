@@ -7,7 +7,7 @@ var burger = require("../models/burger.js");
 
 // Create all our routes and set up logic within those routes where required
 router.get("/", function(req, res){
-    burger.selectAll(function(data) {
+    burger.all(function(data) {
         var hbsObject = {
             burgers: data
         };
@@ -18,26 +18,26 @@ router.get("/", function(req, res){
 
 
 router.post("/api/burgers", function(req, res) {
-    burger.insertOne([
+    burger.create([
         "burger_name", "isDevoured"
     ], [
-        req.body.burger_name, req.body.isDevoured
+        req.body.burger_name, 0
     ], function(result){
         // Send back the ID of the new burger
-        res.json({id: result.insertId });
+        res.json({ id: result.insertId});
     });
 });
 
-router.put("/:id", function(req, res){
+router.put("/api/burgers/:id", function(req, res){
     var condition = "id = " + req.params.id;
 
     console.log("condition", condition);
 
-    burger.updateOne({
+    burger.update({
         isDevoured: req.body.isDevoured
     }, condition, function(result) {
-        if (result.changedRows == 0) {
-            // if no rows were changed, then the ID mus not exist, so 404
+        if(result.affectedRows == 0) {
+            // If no row were changed, then the ID must not exist, so 404
             return res.status(404).end();
         } else {
             res.status(200).end();
