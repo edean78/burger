@@ -2,47 +2,63 @@
     <div class="row">
         <div class="col-md-12" id="header-text">
             <h1>EAT-DA-BURGER</h1>
-        </div>
-        <div class="col-md-4" class="display-burgers">
-            <div class="row">
-                <ul>
-                    {{#each burger}}
-                        {{#unless this.devoured}}
-                            <li>
-                                {{this.id}}<span>.</span> {{this.burger_name}}
-
-                            <form action="/{{this.id}}?_method=PUT" method="POST">
-                                <input type="hidden" name="devour" value="true">
-                                <button type="submit" class="btn btn-warning btn-sm">Devour!</button>
-                            </form>
-                            </li>
-                        {{/unless}}
-                    {{/each}}
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-4" class="devour-burgers">
-            <ul>
-                {{#each burger}}
-                    {{#if this.devoured}}
-                        <li>
-                            {{this.id}}<span>.</span> {{this.burger_name}}
-                        </li>
-                    {{/if}}
-                {{/each}}
-            </ul>
+            <img src="https://images.unsplash.com/photo-1550317138-10000687a72b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+                alt="hamburger-pic">
         </div>
     </div>
-</div>
-<br>
-<div class="container">
+    <br>
     <div class="row">
-        <div class="col-md-12 input-section">
-            <form class="create-burger" action="/" method="POST">
-                <input type="text" name="burgerName" class="form-control" value="" id="input_burger">
-                <button type="submit" class="btn btn-primary" id="post-burger">Submit</button>
-            </form>
-            <p>Input your favorite burger you would like to devour</p>
+        <div class="col-md-6" class="display-burgers">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Burgers to Eat</h5>
+                    <ul class="list-group list-group-flush">
+                        {{#each burger}}
+                        {{#unless this.devoured}}
+                        <li class="list-group-item">
+                            #{{this.id}}. <span>{{this.burger_name}}</span>
+                            <form action="/{{this.id}}?_method=PUT" method="POST">
+                                <input type="hidden" name="devour" value="true">
+                                <button type="submit" class="btn btn-warning btn-md" id="eat">Devour!</button>
+                            </form>
+                        </li>
+                        {{/unless}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" class="devour-burgers">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Devoured Burgers</h5>
+                    <ul class="list-group list-group-flush">
+                        {{#each burger}}
+                        {{#if this.devoured}}
+                        <li class="list-group-item">
+                            #{{this.id}}. <span>{{this.burger_name}}</span>
+                        </li>
+                        {{/if}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6 input-section">
+                <p>Input your favorite burger you would like to devour</p>
+                <form class="create-burger" action="/" method="POST">
+                    <input type="text" name="burgerName" class="form-control" value="" id="input_burger">
+                    <button type="submit" class="btn btn-primary" id="post-burger">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-3">
+            </div>
         </div>
     </div>
 </div>
