@@ -1,9 +1,10 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12 text-center" id="header-text">
+        <div class="col-md-12" id="header-text">
             <h1>EAT-DA-BURGER</h1>
+            <img src="/public/assets/img/hamburger.jpeg" alt="hamburger">
         </div>
-        <div class="col-md-6 text-center" class="display-burgers">
+        <div class="col-md-4" class="display-burgers">
             <div class="row">
                 <ul>
                     {{#each burger}}
@@ -21,7 +22,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-6 text-center" class="devour-burgers">
+        <div class="col-md-4" class="devour-burgers">
             <ul>
                 {{#each burger}}
                     {{#if this.devoured}}
@@ -37,7 +38,7 @@
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 text-center input-section">
+        <div class="col-md-12 input-section">
             <form class="create-burger" action="/" method="POST">
                 <input type="text" name="burgerName" class="form-control" value="" id="input_burger">
                 <button type="submit" class="btn btn-primary" id="post-burger">Submit</button>
