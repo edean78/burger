@@ -6,7 +6,7 @@ var exphbs = require('express-handlebars');
 var mysql = require('mysql');
 
 var app = express();
-appuse(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.urlencoded({
     extended: false

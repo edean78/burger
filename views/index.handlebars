@@ -1,7 +1,30 @@
 <div class="wrapper">
-    <header>
-        <h1>EAT-DA-BURGER</h1>
-        <img src="./public/assets/img/hamburger.jpeg" alt="hamburger-pic" />
+    <div class="row">
+        <div class="col-sx-12 text-center" id="header-text">
+           <h1>EAT-DA-BURGER</h1> 
+        </div>
+        <div class="col md-6 text-center" class="display-burgers">
+            <div class="row">
+                {{#each burger_data}}
+                    {{#unless this.devoured}}
+                <p>
+                    #{{this.id}}. <span>{{this.burger_name}}</span>
+                </p>
+            <div class="col-xs-3 text-center">
+                <form method="POST" action="/burgers/update?_method=PUT" class="but-size">
+                    <input type="hidden" name="burger_id" type="text" value={{this.id}}>
+                    <br>
+                    <button type="submit" class="btn btn-default">DEVOUR!!</button>
+                </form>
+            </div>
+            {{/unless}}
+            {{/each}}
+            </div>
+
+        </div>
+    </div>
+        
+        {{!-- <img src="./public/assets/img/hamburger.jpeg" alt="hamburger-pic" />
     </header>
 
     <div class="container">
@@ -52,6 +75,6 @@
                 {{/if}}
             {{/each}}    
         </ul>
-    </div>
+    </div> --}}
 
 </div>
